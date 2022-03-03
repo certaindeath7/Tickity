@@ -8,9 +8,18 @@ export class OrderCreatedListener extends Listener<IOrderCreatedEvent> {
   queueGroupName = queueGroupName;
 
   async onMessage(data: IOrderCreatedEvent['data'], msg: Message) {
-    await expirationQueue.add({
-      orderId: data.id,
-    });
+    // get the difference time between when the order is expired and current time in miliseconds
+    const delay = new Date(data.expiresAt).getTime() - new Date().getTime();
+    console.log(delay);
+
+    await expirationQueue.add(
+      {
+        orderId: data.id,
+      },
+      {
+        delay,
+      }
+    );
 
     msg.ack();
   }
