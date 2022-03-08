@@ -21,7 +21,7 @@
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/bull": "^3.15.8",
-    "@zenitsu/sharedlogic": "^1.0.16",
+    "@zenitsu/sharedlogic": "^1.0.20",
     "bull": "^4.6.2",
     "node-nats-streaming": "^0.3.2",
     "ts-node-dev": "^1.1.8",
