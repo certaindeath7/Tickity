@@ -52,7 +52,7 @@ it('acks the message', async () => {
   // call onMessage func with msg and data obj
   await listener.onMessage(data, msg);
 
-  expect(msg.ack).not.toHaveBeenCalled();
+  expect(msg.ack).toHaveBeenCalled();
 });
 
 it('did not ack the message if the event skipped an event version number', async () => {
