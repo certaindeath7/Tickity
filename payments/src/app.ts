@@ -1,7 +1,7 @@
 import express from 'express';
 import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError, currentUser } from '@zenitsu/sharedlogic';
-
+import { newChargeRouter } from './routes/newPayment';
 const app = express();
 // trust the traffic under the nginx proxy
 // in this case was to ignore proxy's IP address
@@ -27,7 +27,7 @@ app.use(
   })
 );
 app.use(currentUser);
-
+app.use(newChargeRouter);
 // if there's a route error throw using the app.use(errorHandler)
 app.all('*', async (req, res, next) => {
   next(new NotFoundError());

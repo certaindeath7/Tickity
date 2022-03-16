@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
-
+import { OrderCancelledListener } from './events/listeners/order-cancelled-listener';
+import { OrderCreatedListener } from './events/listeners/order-created-listener';
 const connectDB = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error('JWT key must be defined');
@@ -32,6 +33,8 @@ const connectDB = async () => {
     process.on('SIGTERM', () => natsWrapper.client.close());
 
     // adding the nats listener
+    new OrderCreatedListener(natsWrapper.client).listen();
+    new OrderCancelledListener(natsWrapper.client).listen();
 
     await mongoose.connect(process.env.MONGO_URI);
     console.log('db connected');
@@ -41,7 +44,7 @@ const connectDB = async () => {
 };
 
 app.listen(6003, () => {
-  console.log('Listening on port 6001!!!!!!');
+  console.log('Listening on port 6003!!!!!!');
 });
 
 connectDB();
