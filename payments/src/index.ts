@@ -19,6 +19,10 @@ const connectDB = async () => {
   if (!process.env.NATS_CLUSTER_ID) {
     throw new Error('NATS_CLUSTER_ID key must be defined');
   }
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('NATS_CLUSTER_ID key must be defined');
+  }
+
   try {
     await natsWrapper.connect(
       process.env.NATS_CLUSTER_ID,
