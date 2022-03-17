@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import Ticket from '../../../models/Ticket';
 import Order from '../../../models/Orders';
 import { natsWrapper } from '../../../nats-wrapper';
-import { ExpirationCompleteListener } from '../expiration-complte-listener';
+import { ExpirationCompleteListener } from '../expiration-complete-listener';
 import { IExpirationComplete, OrderStatus } from '@zenitsu/sharedlogic';
 import { Message } from 'node-nats-streaming';
 

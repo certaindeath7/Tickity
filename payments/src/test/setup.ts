@@ -10,6 +10,9 @@ jest.mock('../nats-wrapper');
 
 // function that passed in before will be running before all the tests
 // been executed
+process.env.STRIPE_SECRET_KEY =
+  'sk_test_51IWahDFsXMsySkYKK9S0P834STOHbw4GiNFzKr9KNTAe5hdXRbiP1x1fUzDsYl1svrrLbxWsTzPmWBeGqIH2cFie00ACWHJF9b';
+
 let mongo: any;
 beforeAll(async () => {
   process.env.JWT_KEY = 'ddddd';
