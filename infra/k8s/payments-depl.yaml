@@ -31,11 +31,11 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
-            - name: STRIPE-SECRET-KEY
+            - name: STRIPE_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: stripe-secret-key
-                  key: STRIPE-SECRET-KEY
+                  key: STRIPE_SECRET_KEY
 ---
 apiVersion: v1
 kind: Service
@@ -47,5 +47,5 @@ spec:
   ports:
     - name: payments
       protocol: TCP
-      port: 6003
-      targetPort: 6003
+      port: 6000
+      targetPort: 6000

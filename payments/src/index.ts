@@ -20,7 +20,7 @@ const connectDB = async () => {
     throw new Error('NATS_CLUSTER_ID key must be defined');
   }
   if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error('NATS_CLUSTER_ID key must be defined');
+    throw new Error('STRIPE_SECRET_KEY key must be defined');
   }
 
   try {
@@ -47,8 +47,8 @@ const connectDB = async () => {
   }
 };
 
-app.listen(6003, () => {
-  console.log('Listening on port 6003!!!!!!');
+app.listen(6000, () => {
+  console.log('Listening on port 6000!!!!!!');
 });
 
 connectDB();
