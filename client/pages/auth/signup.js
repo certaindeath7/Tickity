@@ -1,21 +1,46 @@
-import { useState } from "react";
-import useRequest from "../../hooks/useRequest";
-import Router from "next/router";
+import { useState } from 'react';
+import useRequest from '../../hooks/useRequest';
+import Router from 'next/router';
+import { TextField, Button, Typography, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const classes = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+    },
+  },
+  paper: {
+    padding: theme.spacing(2),
+  },
+  form: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  fileInput: {
+    width: '97%',
+    margin: '10px 0',
+  },
+  buttonSubmit: {
+    marginBottom: 10,
+  },
+}));
 
 const Signup = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isSignup, setIsSignup] = useState(false);
 
   // initially, errors will be null
   const { doRequest, errors } = useRequest({
-    url: "/api/users/signup",
-    method: "post",
+    url: '/api/users/signup',
+    method: 'post',
     body: {
       email,
       password,
     },
-    onSuccess: () => Router.push("/"),
+    onSuccess: () => Router.push('/'),
   });
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -23,25 +48,43 @@ const Signup = () => {
     await doRequest();
   };
   return (
-    <form onSubmit={onSubmit}>
-      <h1>Signup</h1>
-      <div className='form-group'>
-        <label>Email Address</label>
-        <input value={email} onChange={(e) => setEmail(e.target.value)} className='form-control' />
-      </div>
-      <div className='form-group'>
-        <label>Password</label>
-        <input
-          type='password'
-          className='form-control'
+    <Paper className={classes.paper}>
+      <form
+        autoComplete="off"
+        noValidate
+        className={`${classes.root} ${classes.form}`}
+        onSubmit={onSubmit}
+      >
+        <TextField
+          name="email"
+          variant="outlined"
+          label="Email Address"
+          fullWidth
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <TextField
+          name="password"
+          variant="outlined"
+          label="Password"
+          fullWidth
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className='form-control'
         />
-      </div>
+        <Button
+          className={classes.buttonSubmit}
+          variant="contained"
+          color="primary"
+          size="large"
+          type="sbmit"
+          fullWidth
+        >
+          Submit
+        </Button>
+      </form>
       {errors}
-      <button className='btn btn-primary'>Sign Up</button>
-    </form>
+    </Paper>
   );
 };
 
