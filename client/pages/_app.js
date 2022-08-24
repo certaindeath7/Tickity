@@ -13,7 +13,7 @@ const MyApp = ({ Component, props, currentUser }) => {
   const { emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
     <CacheProvider value={emotionCache}>
-      <Header>
+      <Header currentUser={currentUser}>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Header>
       <ThemeProvider theme={theme}>
@@ -22,7 +22,9 @@ const MyApp = ({ Component, props, currentUser }) => {
                 build upon. */}
 
         <CssBaseline />
-        <Component currentUser={currentUser} {...props} />
+        <div className="container">
+          <Component currentUser={currentUser} {...props} />
+        </div>
       </ThemeProvider>
     </CacheProvider>
   );
@@ -33,7 +35,7 @@ MyApp.getInitialProps = async (appContext) => {
   const { data } = await client.get('/api/users/currentuser');
   let props = {};
 
-  // if getInitialProps is defined => fetch some data
+  // if getInitialProps is defined (from a child component) => fetch some data
   if (appContext.Component.getInitialProps) {
     props = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser);
   }

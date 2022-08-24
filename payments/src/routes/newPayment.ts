@@ -40,8 +40,8 @@ router.post(
     });
 
     await payment.save();
-    // publish an event that a payment has been made
 
+    // publish an event that a payment has been made
     await new PaymentCreatedPublisher(natsWrapper.client).publish({
       id: payment.id,
       orderId: payment.orderId,

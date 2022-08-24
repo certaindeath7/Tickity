@@ -1,5 +1,14 @@
+import { Typography } from '@material-ui/core';
 const Landing = ({ currentUser }) => {
-  return currentUser ? <h1>You're signed in</h1> : <h1>Please sign in</h1>;
+  return currentUser ? (
+    <Typography>You're signed in</Typography>
+  ) : (
+    <Typography>Please sign in</Typography>
+  );
+
+  Landing.getInitialProps = async (context, client, currentUser) => {
+    return {};
+  };
 };
 
 export default Landing;
