@@ -8,7 +8,7 @@ import { natsWrapper } from '../nats-wrapper';
 import { OrderCreatedPublisher } from '../events/publishers/order-created-publisher';
 
 const router = express.Router();
-const EXPIRATION_WINDOW_SECONDS = 15 * 60;
+const EXPIRATION_WINDOW_SECONDS = 1 * 60;
 router.post(
   '/api/orders',
   requireAuth,
@@ -28,6 +28,7 @@ router.post(
       return res.status(404).json({ errors: [{ msg: 'tickets not existed' }] });
     }
     const isReserved = await ticket.isReserved();
+    console.log(isReserved);
     if (isReserved) {
       return res.status(400).json({ errors: [{ msg: 'tickets already reserved' }] });
     }

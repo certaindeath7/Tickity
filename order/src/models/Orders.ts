@@ -1,6 +1,7 @@
 import mongoose, { mongo } from 'mongoose';
 import { OrderStatus } from '@zenitsu/sharedlogic';
 import { TicketDoc } from './Ticket';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
 interface IOrdersAttrs {
   userId: string;
@@ -38,7 +39,7 @@ const orderSchema = new mongoose.Schema(
     },
     ticket: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Ticket',
+      ref: 'ticket',
     },
   },
   {
@@ -50,7 +51,8 @@ const orderSchema = new mongoose.Schema(
     },
   }
 );
-
+orderSchema.set('versionKey', 'version');
+orderSchema.plugin(updateIfCurrentPlugin);
 // declare the build function
 orderSchema.statics.build = (attr: IOrdersAttrs) => {
   return new Order(attr);

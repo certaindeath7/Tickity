@@ -10,7 +10,6 @@ interface ITicketAttrs {
 }
 
 export interface TicketDoc extends mongoose.Document {
-  id: string;
   title: string;
   price: number;
   version: number;
@@ -44,9 +43,19 @@ const ticketSchema = new mongoose.Schema(
     },
   }
 );
-
+ticketSchema.set('versionKey', 'version');
+ticketSchema.plugin(updateIfCurrentPlugin);
 // statics is how we add a new method to a ticket model
 // this method is to perform action on entire model Ticket
+
+ticketSchema.statics.findTicketEvent = (event: { id: string; version: number }) => {
+  return Ticket.findOne({
+    _id: event.id,
+    version: event.version - 1,
+  });
+};
+
+// add a method to ticket document
 ticketSchema.statics.build = (attrs: ITicketAttrs) => {
   return new Ticket({
     _id: attrs.id,
@@ -54,26 +63,19 @@ ticketSchema.statics.build = (attrs: ITicketAttrs) => {
     price: attrs.price,
   });
 };
-ticketSchema.statics.findTicketEvent = (event: { id: string; version: number }) => {
-  return Ticket.findOne({
-    _id: event['id'],
-    version: event['version'] - 1,
-  });
-};
-ticketSchema.set('versionKey', 'version');
-ticketSchema.plugin(updateIfCurrentPlugin);
-// add a method to ticket document
+
 // hoisting isReserved function
 // this method is to perform on an instance of this model
 ticketSchema.methods.isReserved = async function () {
   // Make sure that the ticket has not been reserved
   // find an order where the ticket is the one we just found and its status is not cancelled
   const existingOrder = await Order.findOne({
-    ticket: this as any,
+    tickets: this as any,
     status: {
       $in: [OrderStatus.Created, OrderStatus.AwaitingPayment, OrderStatus.Complete],
     },
   });
+  console.log(existingOrder);
   return !!existingOrder;
 };
 

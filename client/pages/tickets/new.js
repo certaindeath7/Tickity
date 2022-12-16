@@ -6,13 +6,13 @@ const NewTicket = () => {
   const [price, setPrice] = useState('');
   const [title, setTitle] = useState('');
   const { doRequest, errors } = useRequest({
-    url: 'api/tickets',
+    url: '/api/tickets',
     method: 'post',
     body: {
       title,
       price,
     },
-    onSuccess: (ticket) => console.log(ticket),
+    onSuccess: () => Router.push('/'),
   });
 
   const onSubmit = (e) => {
