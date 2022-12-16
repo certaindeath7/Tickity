@@ -2,35 +2,14 @@ import { useState } from 'react';
 import useRequest from '../../hooks/useRequest';
 import Router from 'next/router';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-const classes = makeStyles((theme) => ({
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-    },
-  },
-  paper: {
-    padding: theme.spacing(2),
-  },
-  form: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-  },
-  fileInput: {
-    width: '97%',
-    margin: '10px 0',
-  },
-  buttonSubmit: {
-    marginBottom: 10,
-  },
-}));
+import useStyles from './style';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignup, setIsSignup] = useState(false);
+  // get the css from material-ui classes
+  const classes = useStyles();
 
   // initially, errors will be null
   const { doRequest, errors } = useRequest({
@@ -68,6 +47,7 @@ const Signup = () => {
           name="password"
           variant="outlined"
           label="Password"
+          type="password"
           fullWidth
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -77,7 +57,7 @@ const Signup = () => {
           variant="contained"
           color="primary"
           size="large"
-          type="sbmit"
+          type="submit"
           fullWidth
         >
           Submit
