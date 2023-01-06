@@ -15,10 +15,13 @@ const ShowTicket = ({ ticket }) => {
       <h1>{ticket.title}</h1>
       <h4>Price: {ticket.price}</h4>
       {/* doRequest with () is a reference to doRequest function
-      If we had doRequest(), it will call that function right after the page is rendered */}
-      <button onClick={doRequest} className="btn btn-primary">
+      If we had doRequest(), it would call that function right after the page is rendered
+      it also would pass event object as a parameter if we called the function by reference
+       */}
+      <button onClick={() => doRequest()} className="btn btn-primary">
         Purchase
       </button>
+      {errors}
     </div>
   );
 };

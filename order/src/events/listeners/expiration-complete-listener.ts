@@ -23,7 +23,7 @@ export class ExpirationCompleteListener extends Listener<IExpirationComplete> {
     await new OrderCancelledPublisher(this.client).publish({
       id: order.id,
       version: order.version,
-      tickets: {
+      ticket: {
         id: order._id,
       },
     });

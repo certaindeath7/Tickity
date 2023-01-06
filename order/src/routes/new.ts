@@ -42,7 +42,7 @@ router.post(
       userId: req.currentUser!.id,
       status: OrderStatus.Created,
       expiresAt: expiration,
-      tickets: ticket,
+      ticket: ticket,
     });
 
     await order.save();
@@ -54,7 +54,7 @@ router.post(
       version: order.version,
       status: order.status,
       expiresAt: order.expiresAt.toISOString(),
-      tickets: {
+      ticket: {
         id: ticket.id,
         price: ticket.price,
       },

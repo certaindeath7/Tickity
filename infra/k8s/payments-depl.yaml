@@ -47,5 +47,5 @@ spec:
   ports:
     - name: payments
       protocol: TCP
-      port: 6000
-      targetPort: 6000
+      port: 6003
+      targetPort: 6003

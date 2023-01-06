@@ -11,7 +11,7 @@ export class OrderCreatedListener extends Listener<IOrderCreatedEvent> {
     // find the order that is pending to be paid
     const order = Order.build({
       id: data.id,
-      price: data.tickets.price,
+      price: data.ticket.price,
       status: data.status,
       userId: data.userId,
       version: data.version,
