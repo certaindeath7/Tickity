@@ -9,7 +9,7 @@ export class OrderCancelledListener extends Listener<IOrderCancelledEvent> {
   subject: Subjects.OrderCancelled = Subjects.OrderCancelled;
   queueGroupName = queueGroupName;
   async onMessage(data: IOrderCancelledEvent['data'], msg: Message) {
-    const ticket = await Ticket.findById(data.tickets.id);
+    const ticket = await Ticket.findById(data.ticket.id);
     if (!ticket) {
       throw new Error('Ticket not found');
     }

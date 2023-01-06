@@ -70,12 +70,12 @@ ticketSchema.methods.isReserved = async function () {
   // Make sure that the ticket has not been reserved
   // find an order where the ticket is the one we just found and its status is not cancelled
   const existingOrder = await Order.findOne({
-    tickets: this as any,
+    ticket: this as any,
     status: {
       $in: [OrderStatus.Created, OrderStatus.AwaitingPayment, OrderStatus.Complete],
     },
   });
-  console.log(existingOrder);
+  // convert an object to boolean value
   return !!existingOrder;
 };
 

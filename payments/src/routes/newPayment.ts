@@ -45,6 +45,7 @@ router.post(
     await new PaymentCreatedPublisher(natsWrapper.client).publish({
       id: payment.id,
       orderId: payment.orderId,
+      stripeId: process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string,
     });
 
     res.status(201).send({ id: payment.id });

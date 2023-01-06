@@ -31,7 +31,7 @@ it('returns an error if the ticket is already reserved', async () => {
     userId: 'dfdfdfdf',
     status: OrderStatus.Created,
     expiresAt: new Date(),
-    tickets: ticket,
+    ticket: ticket,
   });
   await order.save();
 
@@ -41,7 +41,7 @@ it('returns an error if the ticket is already reserved', async () => {
     .send({
       ticketId: ticket.id,
     })
-    .expect(201);
+    .expect(400);
 });
 it('successfully reserved a ticket', async () => {
   const ticket = Ticket.build({
