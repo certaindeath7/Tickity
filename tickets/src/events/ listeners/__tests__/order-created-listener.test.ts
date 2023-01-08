@@ -23,7 +23,7 @@ const setup = async () => {
     status: OrderStatus.Created,
     userId: 'dddddd',
     expiresAt: 'dd',
-    tickets: {
+    ticket: {
       id: ticket.id,
       price: ticket.price,
     },
