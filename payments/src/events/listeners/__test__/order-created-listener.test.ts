@@ -13,7 +13,7 @@ const setup = async () => {
     expiresAt: 'dfasdfasdfa',
     userId: 'dsfasdfasd',
     status: OrderStatus.Created,
-    tickets: {
+    ticket: {
       id: 'asdfasdf',
       price: 111,
     },
@@ -36,7 +36,7 @@ it('order info is retrieved correctly', async () => {
 
   // expect the order ID is the same
   expect(order).toBeDefined();
-  expect(order!.price).toEqual(data.tickets.price);
+  expect(order!.price).toEqual(data.ticket.price);
 });
 
 it('acks the message', async () => {

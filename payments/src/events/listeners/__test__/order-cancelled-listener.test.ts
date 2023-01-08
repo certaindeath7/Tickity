@@ -21,7 +21,7 @@ const setup = async () => {
   const data: IOrderCancelledEvent['data'] = {
     id: order.id,
     version: 1,
-    tickets: {
+    ticket: {
       id: 'asdfasdfasd',
     },
   };
