@@ -1,8 +1,10 @@
 name: orderServiceTest
 
 on:
-  pull_request
-  
+  pull_request:
+  paths:
+    - 'order/**'
+
 jobs:
   build:
     runs-on: ubuntu-latest
